@@ -1,0 +1,20 @@
+body{
+    font-size: 12pt;
+}
+
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,td{
+    border: 1pt solid #D8D9DA;
+    padding: 8px;
+    text-align: left;
+}
+
+th{
+    background-color: #D6EFED;
+    text-align: center;
+}
+

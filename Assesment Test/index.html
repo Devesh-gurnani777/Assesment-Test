@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="styles.css" type="text/css" href="styles.css">
+    <title>Employee Details</title>
+    <script>
+        function loadXMLDoc(){
+            var xmlhttp= new
+            XMLHttpRequest();
+            xmlhttp.onreadystatechange= function(){
+                if(this.readyState ==4 && this.status==200){
+                    displayTable(this);
+                }
+            };
+            xmlhttp.open("GET", "employees.xml",true);
+            xmlhttp.send();
+        }
+
+        function displayTable(xml){
+            var xsl = new XMLHttpRequest();
+            xsl.onreadystatechange = function(){
+                if(this.readyState ==4 && this.status==200){
+                    var xsltProcessor = new XSLTProcessor();
+                    xsltProcessor.importStylesheet(this.responseXML);
+                    var resultDocument = xsltProcessor.transformToFragment(xml.responseXML, document);
+                    document.getElementById("employeeTable").appendChild(resultDocument);
+                }
+            };
+
+            xsl.open("GET", "employee.xsl", true);
+            xsl.send();
+        }
+    </script>
+</head>
+<body onload="loadXMLDoc()">
+    <div id="employeeTable"></div>
+</body>
+</html>
